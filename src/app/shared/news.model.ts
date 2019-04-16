@@ -21,5 +21,6 @@ interface Articles {
 }
 
 export {
+  Article,
   Articles
 }

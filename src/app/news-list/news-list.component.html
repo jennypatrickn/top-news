@@ -1,7 +1,9 @@
-<p>
-  news-list works!
-</p>
+<h1>
+  Top news 
+</h1>
 <ul>
-  <app-news-item></app-news-item>
+  <app-news-item *ngFor="let article of articles"
+    [article]="article">
+  </app-news-item>
 </ul>
 

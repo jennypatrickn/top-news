@@ -1,8 +1,11 @@
-<p>
-  news-detail works!
-</p>
+<h1>
+  Top news details by source
+</h1>
+
+<app-news-item *ngFor="let article of articleBySource"
+    [article]="article">
+  </app-news-item>
 <ul>
-  
   <li>
     <h2><a  routerLink="" routerLinkActive="active">go to home</a></h2>
   </li>

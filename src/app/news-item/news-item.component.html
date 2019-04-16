@@ -1,4 +1,10 @@
-<p>
-  news-item works!
-</p>
-<li routerLink="/news/tbc">list 1</li>
+
+<li  routerLink="/news/{{ article.source.id || article.source.name }}">
+ 
+  <h2>{{ article.publishedAt }}</h2>
+  <div>
+    <label>{{ article.title  | uppercase }}</label>
+    <p>{{ article.description }}</p>
+  </div>
+
+</li>
