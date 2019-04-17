@@ -1,6 +1,17 @@
 interface Source { 
   id: string;
   name: string;
+  description: string;
+  url: string;
+  category: string;
+  language: string; 
+  country: string;
+}
+
+interface Sources {
+  sources: Source[];
+  status: string;
+
 }
 
 interface Article {
@@ -22,5 +33,7 @@ interface Articles {
 
 export {
   Article,
-  Articles
+  Articles,
+  Source,
+  Sources
 }

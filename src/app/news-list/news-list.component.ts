@@ -10,7 +10,9 @@ import { Subject } from 'rxjs';
 })
 export class NewsListComponent implements OnInit {
   articles: Article[];
+  titleText : string = "";
   domainsSubject = new Subject<Articles>();
+  isLoading: boolean = true;
   // list news article fetched and pass to <app-news-item> component
   constructor(private newsService: NewsService) { 
     this.domainsSubject.subscribe(articles => {
@@ -22,13 +24,15 @@ export class NewsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // List initialization
-    let domains = 'wsj.com, newsbtc.com';
+    // List initialization / just to simulate all news contains a letter
+    let query = 'a';
     this.newsService
-        .getAllFakeNewsByDomain(domains)
-        .subscribe(articles => { 
+        .getAllFakeNewsByDomain(query)
+        .subscribe(articles => {
+          this.isLoading = false; 
           this.fetchArticles(articles);
-     });
+     }  ,
+     error => console.log(error));
   }
 
   fetchArticles(articles: Articles) {

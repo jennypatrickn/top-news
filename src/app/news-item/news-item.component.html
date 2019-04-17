@@ -1,10 +1,11 @@
 
-<li  routerLink="/news/{{ article.source.id || article.source.name }}">
+<li  routerLink="/news/{{ article.source.id || '*' }}">
  
   <h2>{{ article.publishedAt }}</h2>
   <div>
     <label>{{ article.title  | uppercase }}</label>
     <p>{{ article.description }}</p>
+    <p><strong>{{ article.author }}</strong></p>
   </div>
 
 </li>

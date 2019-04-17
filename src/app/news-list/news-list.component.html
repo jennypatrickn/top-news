@@ -2,7 +2,10 @@
   Top news 
 </h1>
 <ul>
-  <app-news-item *ngFor="let article of articles | paginate: { itemsPerPage: 5, currentPage: p }"
+  <label>Title Filter </label>
+  <input [(ngModel)]="titleText" placeholder="search by title">
+  <div *ngIf="isLoading else elseBlock">Content loading ...</div>
+  <app-news-item #elseBlock *ngFor="let article of articles | newsFilter: titleText | paginate: { itemsPerPage: 5, currentPage: p }"
     [article]="article">
   </app-news-item>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>

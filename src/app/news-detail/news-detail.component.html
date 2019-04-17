@@ -1,10 +1,18 @@
 <h1>
-  Top news details by source
+  News source details 
 </h1>
 
-<app-news-item *ngFor="let article of articleBySource"
-    [article]="article">
-  </app-news-item>
+  <div *ngIf="isLoading else elseBlock">Content loading ...</div>
+  <li #elseBlock *ngFor="let source of articleBySource">
+ 
+    <h2>{{ source.id }}</h2>
+    <div>
+      <label>{{ source.name  | uppercase }}</label>
+      <p>{{ source.description }}</p>
+      <p><strong>{{ source.url }}</strong></p>
+    </div>
+  
+  </li>
 <ul>
   <li>
     <h2><a  routerLink="" routerLinkActive="active">go to home</a></h2>

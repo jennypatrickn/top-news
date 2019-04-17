@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Articles } from './news.model';
+import { Articles, Source, Sources } from './news.model';
 
 
 @Injectable({
@@ -22,7 +22,7 @@ export class NewsService {
    * @returns { Observable<Articles>  }
    */
   getAllFakeNewsByDomain(domains): Observable<Articles> {
-    const url = `${this.API_ENDPOINT}/everything?domains=${domains}&apiKey=${this.API_KEY}`;
+    const url = `${this.API_ENDPOINT}/everything?q=${domains}&apiKey=${this.API_KEY}`;
     
     return this.http.get<Articles>(url);
   }
@@ -34,10 +34,11 @@ export class NewsService {
    * @params {void}
    * @returns { Observable<Articles>  }
    */
-  getTopHeadlinesBySource(sources): Observable<Articles> {
-    const url = `${this.API_ENDPOINT}/everything?sources=${sources}&apiKey=${this.API_KEY}`;
+  getTopHeadlinesBySource(sources): Observable<Sources> {
+    // sources=${sources}&
+    const url = `${this.API_ENDPOINT}/sources?apiKey=${this.API_KEY}`;
     // Article avec filtre : https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=48e9d05d148f48439968584ba4ea656c
-    return this.http.get<Articles>(url);
+    return this.http.get<Sources>(url);
   }
 
   private log(errorMessage: string) {

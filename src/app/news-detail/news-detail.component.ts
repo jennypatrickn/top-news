@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from '../shared/news.service';
-import { Article } from '../shared/news.model';
+import { Article, Source, Sources } from '../shared/news.model';
 
 @Component({
   selector: 'app-news-detail',
@@ -9,7 +9,8 @@ import { Article } from '../shared/news.model';
   styleUrls: ['./news-detail.component.scss']
 })
 export class NewsDetailComponent implements OnInit {
-  articleBySource : Article[];
+  articleBySource : Source[];
+  isLoading: boolean = true;
   constructor(private route: ActivatedRoute,
               private newsService: NewsService) { }
 
@@ -18,13 +19,21 @@ export class NewsDetailComponent implements OnInit {
     this.newsService
         .getTopHeadlinesBySource(articleSource)
         .subscribe(response => { 
-          console.log("response ",response.articles);
-          this.articleBySource = response.articles as Article[];
-     });
+          console.log("response ",response.sources);
+          this.articleBySource = (response.sources as Source[]).filter(source => { 
+            console.log(source.id, source.name, articleSource);
+            // this is just way to get one unique source because the API didnt provide one
+            return source.id===articleSource;
+           });
+           this.isLoading = false;
+          },
+          error => console.log(error)
+        );
   }
 
   getArticleSource() {
-    return this.route.snapshot.paramMap.get("source");
+    const urlParameter = this.route.snapshot.paramMap.get("source");
+    return urlParameter;
   }
 
 }
